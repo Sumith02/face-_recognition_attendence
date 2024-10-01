@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Image</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Process Image: {{ filename }}</h1>
+        <form action="" method="post">
+            <label for="process">Choose the process:</label>
+            <select name="process" id="process" class="dropdown">
+                <option value="1">Compress the image</option>
+                <option value="2">Convert to black and white</option>
+                <option value="3">Both compress and convert to black and white</option>
+            </select>
+            <br>
+            <label for="quality">Quality (1-100):</label>
+            <input type="number" name="quality" id="quality" min="1" max="100" value="50" class="input-field">
+            <br>
+            <input type="submit" value="Process Image" class="button">
+        </form>
+        {% if processed_image_name %}
+        <div class="result">
+            <h2>Original and Processed Images:</h2>
+            <div class="image-container">
+                <div class="image-box">
+                    <h3>Original Image:</h3>
+                    <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Original Image">
+                    <p>Size: {{ original_size }} bytes</p>
+                </div>
+                <div class="image-box">
+                    <h3>Processed Image:</h3>
+                    <img src="{{ url_for('static', filename='processed/' + processed_image_name) }}" alt="Processed Image">
+                    <p>Size: {{ processed_size }} bytes</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
